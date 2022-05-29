@@ -19,7 +19,12 @@ passport.use(
       clientSecret: keys.googleClientSecret as string,
       callbackURL: "/auth/google/callback" as string,
     },
-    (accessToken: string, _refreshToken: string | undefined, profile: Profile, _done: void) => {
+    (
+      accessToken: string,
+      _refreshToken: string | undefined,
+      profile: Profile,
+      done: (arg0: null, arg1: Profile) => void //* done -> callback(error, existingRecord)
+    ) => {
       console.log({accessToken});
       // console.log({refreshToken});
       // console.log({profile});
@@ -28,12 +33,19 @@ passport.use(
       User.findOne({googleID: profile.id}).then((existingUser: Profile) => {
         if (existingUser) {
           // We already have a record with the given profile ID
+          console.log({existingUser});
+          done(null, existingUser);
         } else {
           // We don't have a user with this ID, make a new record
           new User({
             googleID: profile.id,
             name: profile.displayName || undefined,
-          }).save();
+          })
+            .save()
+            .then((user: Profile) => {
+              done(null, user);
+              console.log("user was added to the MongoDB");
+            });
         }
       });
     }
