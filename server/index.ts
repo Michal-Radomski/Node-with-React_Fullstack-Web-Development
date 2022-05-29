@@ -4,9 +4,9 @@ const mongoDB_key = require("./config/keys").mongoURI;
 
 // console.log({mongoDB_key});
 
+require("./models/User");
 require("./services/passport"); //* Calling the function immediately instead of storing it in a variable
 // const authRoutes = require("./routes/authRoutes");
-require("./models/User");
 
 const app = express();
 
@@ -34,3 +34,7 @@ const PORT = (process.env.PORT || 5000) as number;
 app.listen(PORT, () => {
   console.log(`The server is running on port: ${PORT}`);
 });
+
+//------------
+const now: Date = new Date();
+console.log("Current time:", now.toLocaleString());
