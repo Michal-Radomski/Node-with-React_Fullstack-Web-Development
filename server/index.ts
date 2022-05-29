@@ -6,6 +6,7 @@ const mongoDB_key = require("./config/keys").mongoURI;
 
 require("./services/passport"); //* Calling the function immediately instead of storing it in a variable
 // const authRoutes = require("./routes/authRoutes");
+require("./models/User");
 
 const app = express();
 
