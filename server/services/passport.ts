@@ -14,7 +14,7 @@ interface Profile extends Object {
 }
 
 passport.serializeUser((user: Profile, done: (arg0: null, arg1: ObjectId) => void) => {
-  console.log("serializeUser -> user._id:", user._id);
+  // console.log("serializeUser -> user._id:", user._id);
   //* arguments: userModel and done
   done(null, user._id); //* Arguments: error object and
 });
@@ -22,7 +22,7 @@ passport.serializeUser((user: Profile, done: (arg0: null, arg1: ObjectId) => voi
 passport.deserializeUser((_id: ObjectId, done: (arg0: null, arg1: Profile) => void) => {
   //* arguments: _id:ObjectId  and done
   User.findById(_id).then((user: Profile) => {
-    console.log("deserializeUser -> user:", user);
+    // console.log("deserializeUser -> user:", user);
     done(null, user); //* Arguments: error object and found user
   });
 });
@@ -48,7 +48,7 @@ passport.use(
       User.findOne({googleID: profile.id}).then((existingUser: Profile) => {
         if (existingUser) {
           // We already have a record with the given profile ID
-          console.log({existingUser});
+          // console.log({existingUser});
           done(null, existingUser);
         } else {
           // We don't have a user with this ID, make a new record
@@ -58,7 +58,7 @@ passport.use(
           })
             .save()
             .then((user: Profile) => {
-              console.log("User was added to the MongoDB");
+              console.log("User was added to the MongoDB:", user);
               done(null, user);
             });
         }

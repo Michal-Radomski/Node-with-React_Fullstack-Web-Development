@@ -9,17 +9,26 @@ module.exports = (app: {get: (arg0: string, arg1: any) => void}) => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+    })
+  );
 
   app.get("/api/logout", (req: Request, res: Response) => {
-    res.send(req.user);
-    req.logout();
-    res.redirect("/");
+    // res.send(req.user);
+    res.redirect(200, "/");
+    setTimeout(() => {
+      req.logout();
+      console.log("Logged Out");
+    }, 500);
   });
 
   app.get("/api/current_user", (req: Request, res: Response) => {
-    console.log("req.user:", req.user);
-    console.log("req.session:", req.session);
+    // console.log("req.user:", req.user);
+    // console.log("req.session:", req.session);
     res.send(req.user);
   });
 
