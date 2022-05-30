@@ -59,7 +59,7 @@ passport.use(
             .save()
             .then((user: Profile) => {
               done(null, user);
-              console.log("user was added to the MongoDB");
+              console.log("User was added to the MongoDB");
             });
         }
       });

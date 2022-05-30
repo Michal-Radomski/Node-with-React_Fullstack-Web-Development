@@ -24,12 +24,6 @@ mongoose
 
 const app = express();
 
-// import {Request, Response} from "express";
-// app.get("/", (req: Request, res: Response) => {
-//   console.log("req.ip", req.ip);
-//   res.send({hi: "there"});
-// });
-
 app.use(
   cookieSession({
     // Cookie Options

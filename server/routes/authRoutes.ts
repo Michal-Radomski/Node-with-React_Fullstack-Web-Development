@@ -1,5 +1,4 @@
 import passport from "passport";
-
 import {Request, Response} from "express";
 
 module.exports = (app: {get: (arg0: string, arg1: any) => void}) => {
@@ -20,6 +19,7 @@ module.exports = (app: {get: (arg0: string, arg1: any) => void}) => {
 
   app.get("/api/current_user", (req: Request, res: Response) => {
     console.log("req.user:", req.user);
+    console.log("req.session:", req.session);
     res.send(req.user);
   });
 
@@ -27,7 +27,8 @@ module.exports = (app: {get: (arg0: string, arg1: any) => void}) => {
     res.send("Log In");
   });
 
-  app.get("/", (_req: Request, res: Response) => {
+  app.get("/", (req: Request, res: Response) => {
+    console.log("req.ip", req.ip);
     res.send("Home Page");
   });
 };
