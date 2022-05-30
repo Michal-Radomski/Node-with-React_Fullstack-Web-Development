@@ -7,6 +7,7 @@ const mongoDB_key = require("./config/keys").mongoURI;
 const cookie_Key = require("./config/keys").cookieKey;
 
 // console.log({mongoDB_key});
+console.log({cookie_Key});
 
 require("./models/User");
 require("./services/passport"); //* Calling the function immediately instead of storing it in a variable

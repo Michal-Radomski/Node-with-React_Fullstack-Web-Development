@@ -1,6 +1,5 @@
-export {}; //* Cannot redeclare block-scoped variable 'passport'.ts(2451)
-// import passport from "passport";
-const passport = require("passport");
+import passport from "passport";
+
 import {Request, Response} from "express";
 
 module.exports = (app: {get: (arg0: string, arg1: any) => void}) => {
