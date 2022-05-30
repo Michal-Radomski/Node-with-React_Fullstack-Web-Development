@@ -15,12 +15,16 @@ interface Profile extends Object {
 }
 
 passport.serializeUser((user: Profile, done: (arg0: null, arg1: ObjectId) => void) => {
-  done(null, user._id);
+  //* arguments: userModel and done
+  done(null, user._id); //* Arguments: error object and
+  console.log("serializeUser -> user._id:", user._id);
 });
 
 passport.deserializeUser((_id: ObjectId, done: (arg0: null, arg1: Profile) => void) => {
+  //* arguments: _id:ObjectId  and done
   User.findById(_id).then((user: Profile) => {
-    done(null, user);
+    done(null, user); //* Arguments: error object and found user
+    console.log("deserializeUser -> user:", user);
   });
 });
 
