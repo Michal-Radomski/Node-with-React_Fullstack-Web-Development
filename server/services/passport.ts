@@ -33,6 +33,7 @@ passport.use(
       clientID: keys.googleClientID as string,
       clientSecret: keys.googleClientSecret as string,
       callbackURL: "/auth/google/callback" as string,
+      proxy: true,
     },
     (
       accessToken: string,
