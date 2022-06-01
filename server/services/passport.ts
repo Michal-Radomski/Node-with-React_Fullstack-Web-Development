@@ -69,6 +69,39 @@ passport.deserializeUser((_id: ObjectId, done: (arg0: null, arg1: Profile) => vo
 // );
 
 //* async/await version
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: keys.googleClientID as string,
+//       clientSecret: keys.googleClientSecret as string,
+//       callbackURL: "/auth/google/callback" as string,
+//       proxy: true,
+//     },
+//     async (
+//       accessToken: string,
+//       _refreshToken: string,
+//       profile: Profile,
+//       done: (arg0: null, arg1: Profile) => void //* done -> callback(error, existingRecord)
+//     ) => {
+//       console.log({accessToken});
+//       const existingUser = await User.findOne({googleID: profile.id});
+//       if (existingUser) {
+//         // We already have a record with the given profile ID
+//         // console.log({existingUser});
+//         done(null, existingUser);
+//       } else {
+//         // We don't have a user with this ID, make a new record
+//         const user = await new User({
+//           googleID: profile.id,
+//           name: profile.displayName,
+//         }).save();
+//         done(null, user);
+//       }
+//     }
+//   )
+// );
+
+//* another refactor
 passport.use(
   new GoogleStrategy(
     {
@@ -77,26 +110,19 @@ passport.use(
       callbackURL: "/auth/google/callback" as string,
       proxy: true,
     },
-    async (
-      accessToken: string,
-      _refreshToken: string,
-      profile: Profile,
-      done: (arg0: null, arg1: Profile) => void //* done -> callback(error, existingRecord)
-    ) => {
+    async (accessToken: string, _refreshToken: string, profile: Profile, done: (arg0: null, arg1: Profile) => void) => {
       console.log({accessToken});
       const existingUser = await User.findOne({googleID: profile.id});
       if (existingUser) {
         // We already have a record with the given profile ID
-        // console.log({existingUser});
-        done(null, existingUser);
-      } else {
-        // We don't have a user with this ID, make a new record
-        const user = await new User({
-          googleID: profile.id,
-          name: profile.displayName,
-        }).save();
-        done(null, user);
+        return done(null, existingUser);
       }
+      // We don't have a user with this ID, make a new record
+      const user = await new User({
+        googleID: profile.id,
+        name: profile.displayName,
+      }).save();
+      done(null, user);
     }
   )
 );
