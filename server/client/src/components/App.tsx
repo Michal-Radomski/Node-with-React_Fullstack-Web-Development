@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
+import "materialize-css/dist/css/materialize.min.css";
 import "./App.scss";
 import Header from "./Header";
 
