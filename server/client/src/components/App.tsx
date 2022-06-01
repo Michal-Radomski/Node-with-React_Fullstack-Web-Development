@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-import "materialize-css/dist/css/materialize.min.css";
+// import "materialize-css/dist/css/materialize.min.css"; //* npm package replaced with CDNjs
 import "./App.scss";
 import Header from "./Header";
 
@@ -13,7 +13,7 @@ const NotFound = (): JSX.Element => <h2>Page Not Found</h2>;
 function App(): JSX.Element {
   return (
     <React.Fragment>
-      <div>
+      <div className="container">
         <Router>
           <div>
             {/* Header always visible */}
