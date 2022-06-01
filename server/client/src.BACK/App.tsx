@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 
-function App() {
+function App(): JSX.Element {
   return (
     <React.Fragment>
       App
