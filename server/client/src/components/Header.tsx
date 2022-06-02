@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
-type HeaderProps = {auth: Auth | null | boolean};
+type HeaderProps = {auth: Auth | null | false};
 type HeaderState = {};
 
 class Header extends React.Component<HeaderProps, HeaderState> {
@@ -25,13 +26,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
   }
   render() {
-    console.log("this.props:", this.props);
+    console.log("this.props.auth:", this.props.auth);
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="https://mern-node-react-app.herokuapp.com" className="left brand-logo">
+          <Link to={this.props.auth ? "/surveys" : "/"} className="left brand-logo">
             Emaily
-          </a>
+          </Link>
           <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>
