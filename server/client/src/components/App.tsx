@@ -6,10 +6,10 @@ import * as actions from "../redux/actions/index";
 // import "materialize-css/dist/css/materialize.min.css"; //* npm package replaced with CDNjs
 import "./App.scss";
 import Header from "./Header";
+import Landing from "./Landing";
 
 const Dashboard = (): JSX.Element => <h2>Dashboard</h2>;
 const SurveyNew = (): JSX.Element => <h2>SurveyNew</h2>;
-const Landing = (): JSX.Element => <h2>Landing</h2>;
 const NotFound = (): JSX.Element => <h2>Page Not Found</h2>;
 
 class App extends React.Component<{fetchUser: Fetch}, {}> {

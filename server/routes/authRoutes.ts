@@ -19,11 +19,12 @@ module.exports = (app: {get: (arg0: string, arg1: any) => void}) => {
 
   app.get("/api/logout", (req: Request, res: Response) => {
     // res.send(req.user);
-    res.redirect(200, "/");
+    // res.redirect(200, "/");
     setTimeout(() => {
       req.logout();
       console.log("Logged Out");
-    }, 500);
+      res.redirect("/");
+    }, 250);
   });
 
   app.get("/api/current_user", (req: Request, res: Response) => {
