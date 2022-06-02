@@ -24,7 +24,7 @@ class App extends React.Component<{fetchUser: Dispatch}, {}> {
           <Router>
             <div>
               {/* Header always visible */}
-              <Header />
+              <Header auth={null} />
               <Switch>
                 <Route path="/" exact={true} component={Landing} />
                 <Route path="/surveys" exact={true} component={Dashboard} />
