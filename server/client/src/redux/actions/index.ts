@@ -4,12 +4,17 @@ import {FETCH_USER} from "./types";
 
 // export const fetchUser = () => {
 //   return function (dispatch: Dispatch) {
-//     axios.get("./api/current_user").then((response) => dispatch({type: FETCH_USER, payload: response}));
+//     axios.get("./api/current_user").then((response) => dispatch({type: FETCH_USER, payload: response?.data}));
 //   };
 // };
 
-//* After refactoring
+// //* After refactoring
+// export const fetchUser = () => async (dispatch: Dispatch) => {
+//   const response = await axios.get("./api/current_user");
+//   dispatch({type: FETCH_USER, payload: response?.data});
+// };
+
+//* After refactoring2
 export const fetchUser = () => async (dispatch: Dispatch) => {
-  const response = await axios.get("./api/current_user");
-  dispatch({type: FETCH_USER, payload: response});
+  dispatch({type: FETCH_USER, payload: (await axios.get("./api/current_user"))?.data});
 };
