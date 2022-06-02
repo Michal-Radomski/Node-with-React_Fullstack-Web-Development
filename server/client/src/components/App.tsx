@@ -12,7 +12,7 @@ const SurveyNew = (): JSX.Element => <h2>SurveyNew</h2>;
 const Landing = (): JSX.Element => <h2>Landing</h2>;
 const NotFound = (): JSX.Element => <h2>Page Not Found</h2>;
 
-class App extends React.Component<{fetchUser: Dispatch}, {}> {
+class App extends React.Component<{fetchUser: Fetch}, {}> {
   componentDidMount() {
     this.props.fetchUser();
   }

@@ -2,7 +2,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-type HeaderProps = {auth: typeof Object | null | boolean};
+type HeaderProps = {auth: Auth | null | boolean};
 type HeaderState = {};
 
 class Header extends React.Component<HeaderProps, HeaderState> {
@@ -39,8 +39,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   }
 }
 
-function mapStateToProps(state: State) {
-  return {auth: state.auth};
-}
+// function mapStateToProps(state: State) {
+//   return {auth: state.auth};
+// }
+//* refactor
+const mapStateToProps = (state: State) => ({
+  auth: state.auth,
+});
 
 export default connect(mapStateToProps, null)(Header);
