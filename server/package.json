@@ -24,7 +24,8 @@
     "mongoose": "^6.3.5",
     "nodemon": "^2.0.16",
     "passport": "^0.5.3",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "stripe": "^9.6.0"
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.44",
