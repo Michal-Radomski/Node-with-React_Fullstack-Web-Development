@@ -1,4 +1,5 @@
 import axios from "axios";
+import {Token} from "react-stripe-checkout";
 
 import {FETCH_USER} from "./types";
 
@@ -17,4 +18,9 @@ import {FETCH_USER} from "./types";
 //* After refactoring2
 export const fetchUser = () => async (dispatch: Dispatch) => {
   dispatch({type: FETCH_USER, payload: (await axios.get("./api/current_user"))?.data});
+};
+
+export const handleToken = (token: Token) => async (dispatch: Dispatch) => {
+  const response = await axios.post("./api/stripe", token);
+  dispatch({type: FETCH_USER, payload: response?.data});
 };
