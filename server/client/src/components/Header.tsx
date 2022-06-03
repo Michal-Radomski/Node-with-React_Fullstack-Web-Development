@@ -21,10 +21,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         );
       default:
         return [
-          <li>
+          <li key="1">
             <Payments />
           </li>,
-          <li>
+          <li key="2">
             <a href="/api/logout">LogOut</a>
           </li>,
         ];
