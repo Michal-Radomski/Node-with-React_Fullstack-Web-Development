@@ -12,6 +12,9 @@ const Dashboard = (): JSX.Element => <h2>Dashboard</h2>;
 const SurveyNew = (): JSX.Element => <h2>SurveyNew</h2>;
 const NotFound = (): JSX.Element => <h2>Page Not Found</h2>;
 
+// console.log("process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+// console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
+
 class App extends React.Component<{fetchUser: Fetch}, {}> {
   componentDidMount() {
     this.props.fetchUser();
