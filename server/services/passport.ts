@@ -11,6 +11,7 @@ interface Profile extends Object {
   displayName: string;
   id: string;
   _id: ObjectId; //* MongoDB _Id
+  credits?: number;
 }
 
 passport.serializeUser((user: Profile, done: (arg0: null, arg1: ObjectId) => void) => {
