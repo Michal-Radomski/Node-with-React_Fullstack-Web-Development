@@ -2,6 +2,8 @@ const keys = require("../config/keys");
 const stripe = require("stripe")(keys.stripeSecretKey);
 import {Request, Response} from "express";
 
+const requireLogin = require("../middleware/requireLogin");
+
 interface CustomRequest extends Request {
   user: {
     credits: number;
@@ -9,8 +11,12 @@ interface CustomRequest extends Request {
   };
 }
 
-module.exports = (app: {post: (arg0: string, arg1: Object) => void}) => {
-  app.post("/api/stripe", async (req: CustomRequest, res: Response) => {
+module.exports = (app: {post: (arg0: string, arg1: void, arg2: Object) => void}) => {
+  app.post("/api/stripe", requireLogin, async (req: CustomRequest, res: Response) => {
+    //* requireLogin is used instead of condition IF below:
+    // if (!req.user) {
+    //   return res.status(401).send({error: "You must logged in!"});
+    // }
     // console.log("req.body:", req.body);
     const charge = await stripe.charges.create({
       amount: 500,
