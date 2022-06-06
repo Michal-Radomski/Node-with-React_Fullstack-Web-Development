@@ -13,7 +13,8 @@
     "server": "nodemon index.ts",
     "build": "rimraf build && tsc",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --client && npm run build --prefix client"
   },
   "author": "MichRad",
   "license": "MIT",
