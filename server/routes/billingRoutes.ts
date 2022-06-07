@@ -1,18 +1,21 @@
+import express from "express";
+
 const keys = require("../config/keys");
-const stripe = require("stripe")(keys.stripeSecretKey);
-import {Request, Response} from "express";
+
+// const stripe = require("stripe")(keys.stripeSecretKey);
+import Stripe from "stripe";
+
+import {CustomRequest} from "../Interfaces";
+
+const stripe = new Stripe(keys.stripeSecretKey, {
+  apiVersion: "2020-08-27",
+  timeout: 10000,
+});
 
 const requireLogin = require("../middleware/requireLogin");
 
-interface CustomRequest extends Request {
-  user: {
-    credits: number;
-    save(): void;
-  };
-}
-
 module.exports = (app: {post: (arg0: string, arg1: void, arg2: Object) => void}) => {
-  app.post("/api/stripe", requireLogin, async (req: CustomRequest, res: Response) => {
+  app.post("/api/stripe", requireLogin, async (req: CustomRequest, res: express.Response) => {
     //* requireLogin is used instead of condition IF below:
     // if (!req.user) {
     //   return res.status(401).send({error: "You must logged in!"});
@@ -22,7 +25,8 @@ module.exports = (app: {post: (arg0: string, arg1: void, arg2: Object) => void})
       amount: 500,
       currency: "usd",
       description: "$5 for 5 credits",
-      source: req.body.id,
+      // @ts-ignore
+      source: req.body?.id,
     });
     // console.log({charge});
     // console.log({res});
