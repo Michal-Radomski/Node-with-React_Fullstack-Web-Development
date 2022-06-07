@@ -12,6 +12,7 @@ const cookie_Key = require("./config/keys").cookieKey;
 // console.log({cookie_Key});
 
 require("./models/User");
+require("./models/Survey");
 require("./services/passport"); //* Calling the function immediately instead of storing it in a variable
 // const authRoutes = require("./routes/authRoutes");
 
