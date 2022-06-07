@@ -25,10 +25,9 @@ module.exports = (app: {post: (arg0: string, arg1: void, arg2: Object) => void})
       amount: 500,
       currency: "usd",
       description: "$5 for 5 credits",
-      // @ts-ignore
       source: req.body?.id,
     });
-    // console.log({charge});
+    console.log("charge.id:", charge.id);
     // console.log({res});
     // console.log("req.user:", req.user);
 
