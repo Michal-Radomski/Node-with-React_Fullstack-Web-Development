@@ -4,7 +4,7 @@
   "description": "Node.js server",
   "main": "index.ts",
   "engines": {
-    "node": "16.15.0",
+    "node": "16.15.1",
     "npm": "8.11.0"
   },
   "scripts": {
@@ -27,6 +27,7 @@
     "nodemon": "^2.0.16",
     "passport": "^0.5.3",
     "passport-google-oauth20": "^2.0.0",
+    "sendgrid": "^5.2.3",
     "stripe": "^9.6.0"
   },
   "devDependencies": {

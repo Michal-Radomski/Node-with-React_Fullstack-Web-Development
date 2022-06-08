@@ -8,6 +8,7 @@ import {CustomRequest} from "../Interfaces";
 const Survey = mongoose.model("surveys");
 
 module.exports = (app: any) => {
+  //+  --------------------          Type later
   app.post("/api/surveys", requireLogin, requireCredits, (req: CustomRequest, _res: express.Response) => {
     const {title, subject, body, recipients} = req.body;
 
@@ -25,5 +26,6 @@ module.exports = (app: any) => {
       _user: req?.user?.id,
       dateSent: Date.now(),
     });
+    console.log({survey});
   });
 };
