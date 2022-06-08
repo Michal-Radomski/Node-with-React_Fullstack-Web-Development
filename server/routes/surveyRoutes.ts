@@ -5,6 +5,7 @@ const requireLogin = require("../middleware/requireLogin");
 const requireCredits = require("../middleware/requireCredits");
 import {CustomRequest} from "../Interfaces";
 const Mailer = require("../services/Mailer");
+const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 
 const Survey = mongoose.model("surveys");
 
@@ -30,6 +31,7 @@ module.exports = (app: any) => {
     console.log({survey});
 
     //* Place to send and email
-    const mailer = new Mailer();
+    const mailer = new Mailer(survey, surveyTemplate(survey));
+    console.log({mailer});
   });
 };
