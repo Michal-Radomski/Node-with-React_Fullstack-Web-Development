@@ -44,6 +44,18 @@ class Mailer extends helper.Mail {
     });
     this.addPersonalization(personalize);
   }
+
+  async send(): Promise<Object> {
+    const request = this.sgApi.emptyRequest({
+      method: "POST",
+      path: "/v3/mail/send",
+      body: this.toJSON(),
+    });
+
+    const response = await this.sgApi.API(request);
+    console.log({response});
+    return response;
+  }
 }
 
 module.exports = Mailer;
