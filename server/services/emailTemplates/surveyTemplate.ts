@@ -1,4 +1,20 @@
-module.exports = (survey: any) => {
-  //+ change any
-  return "<div>" + survey.body + "</div>";
+module.exports = (survey: {body: string; id: string}) => {
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+    <body>
+      <div style="text-align: center; background-color: whitesmoke">
+        <h3>I'd like your input!</h3>
+        <p>Please answer the following question:</p>
+        <p>${survey.body}</p>
+        <div>
+        <a href="http://localhost:3000">Yes</a>
+        </div>
+        <div>
+        <a href="http://localhost:3000">No</a>
+        </div>
+      </div>
+    </body>
+  </html>
+`;
 };

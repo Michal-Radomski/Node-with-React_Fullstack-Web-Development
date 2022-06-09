@@ -9,8 +9,9 @@ const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 
 const Survey = mongoose.model("surveys");
 
-module.exports = (app: any) => {
-  //+  --------------------          Type later
+module.exports = (app: {
+  post: (arg0: string, arg1: void, arg2: void, arg3: (req: CustomRequest, _res: express.Response) => void) => void;
+}) => {
   app.post("/api/surveys", requireLogin, requireCredits, (req: CustomRequest, _res: express.Response) => {
     const {title, subject, body, recipients} = req.body;
 
