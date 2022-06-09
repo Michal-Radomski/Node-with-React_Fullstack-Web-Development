@@ -1,4 +1,5 @@
 import express from "express";
+
 import mongoose from "mongoose";
 
 const requireLogin = require("../middleware/requireLogin");
@@ -10,9 +11,15 @@ const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 const Survey = mongoose.model("surveys");
 
 module.exports = (app: {
-  post: (arg0: string, arg1: void, arg2: void, arg3: (req: CustomRequest, _res: express.Response) => void) => void;
+  post: (arg0: string, arg1: void, arg2: void, arg3: (req: CustomRequest, res: express.Response) => void) => void;
+  get: (arg0: string, arg1: (req: express.Request, res: express.Response) => void) => void;
 }) => {
-  app.post("/api/surveys", requireLogin, requireCredits, (req: CustomRequest, _res: express.Response) => {
+  app.get("api/survey/thanks", (req: express.Request, res: express.Response) => {
+    console.log("req.ip:", req.ip);
+    res.send("Thanks for Voting!");
+  });
+
+  app.post("/api/surveys", requireLogin, requireCredits, async (req: CustomRequest, res: express.Response) => {
     const {title, subject, body, recipients} = req.body;
 
     //* survey is an instance of Survey!
@@ -29,11 +36,21 @@ module.exports = (app: {
       _user: req?.user?.id,
       dateSent: Date.now(),
     });
-    console.log({survey});
+    // console.log(survey);
 
     //* Place to send and email
     const mailer = new Mailer(survey, surveyTemplate(survey));
-    console.log({mailer});
-    mailer.send();
+    // console.log({mailer});
+
+    try {
+      await mailer.send();
+      await survey.save();
+      req.user.credits -= 1;
+      const user = await req.user.save();
+      res.send(user);
+    } catch (error) {
+      console.log({error});
+      res.status(422).send(error);
+    }
   });
 };
