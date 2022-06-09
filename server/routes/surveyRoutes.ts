@@ -14,7 +14,7 @@ module.exports = (app: {
   post: (arg0: string, arg1: void, arg2: void, arg3: (req: CustomRequest, res: express.Response) => void) => void;
   get: (arg0: string, arg1: (req: express.Request, res: express.Response) => void) => void;
 }) => {
-  app.get("api/survey/thanks", (req: express.Request, res: express.Response) => {
+  app.get("/api/surveys/thanks", (req: express.Request, res: express.Response) => {
     console.log("req.ip:", req.ip);
     res.send("Thanks for Voting!");
   });
