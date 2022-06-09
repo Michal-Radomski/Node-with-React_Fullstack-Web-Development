@@ -24,7 +24,7 @@ class Payments extends React.Component<{handleToken: (token: Token) => void}, {}
           zipCode={false}
           allowRememberMe={false}
         >
-          <button className="btn">Pay With Card</button>
+          <button className="btn">Add Credits: Pay With Card</button>
         </StripeCheckOut>
       </div>
     );

@@ -7,26 +7,8 @@ import * as actions from "../redux/actions/index";
 import "./App.scss";
 import Header from "./Header";
 import Landing from "./Landing";
+import Dashboard from "./Dashboard";
 
-const Dashboard = (): JSX.Element => {
-  return (
-    <>
-      <h2>Dashboard</h2>
-      <div>
-        <h3>To test type:</h3>
-        <p>Card Number: 4242424242424242</p>
-        <p>CVC: Any 3 digits</p>
-        <p>Date: Any future date</p>
-        <p>
-          Link:{" "}
-          <a href="https://stripe.com/docs/testing?numbers-or-method-or-token=card-numbers" target="_blank" rel="noreferrer">
-            Stripe Docs
-          </a>
-        </p>
-      </div>
-    </>
-  );
-};
 const SurveyNew = (): JSX.Element => <h2>SurveyNew</h2>;
 const NotFound = (): JSX.Element => <h2>Page Not Found</h2>;
 
