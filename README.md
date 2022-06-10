@@ -6,4 +6,6 @@ Files created during the Udemy.com course:
 
 Issue: <https://github.com/expressjs/cookie-session/issues/166>
 
+To install packages run: **npm i --legacy-peer-deps**
+
 App demo: <https://mern-node-react-app.herokuapp.com>
