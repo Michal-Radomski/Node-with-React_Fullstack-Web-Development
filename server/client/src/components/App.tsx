@@ -8,8 +8,8 @@ import "./App.scss";
 import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
+import SurveyNew from "./surveys/SurveyNew";
 
-const SurveyNew = (): JSX.Element => <h2>SurveyNew</h2>;
 const NotFound = (): JSX.Element => <h2>Page Not Found</h2>;
 
 // console.log("process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY:", process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
