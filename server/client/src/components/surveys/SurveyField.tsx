@@ -17,9 +17,11 @@ const SurveyField = ({
     <div>
       <label>{label}</label>
       {/* //* All values are included from props.input e.g. onChange={input.onChange} etc */}
-      <input {...input} />
-      {/* //* If touched is true and error exists => shot the error! Jf touched is falsy JS stop to execute the statement */}
-      {touched && error}
+      <input {...input} style={{marginBottom: "5px"}} />
+      <div className="red-text" style={{marginBottom: "20px"}}>
+        {/* //* If touched is true and error exists => shot the error! If touched is falsy JS stop to execute the expression */}
+        {touched && error}
+      </div>
     </div>
   );
 };
