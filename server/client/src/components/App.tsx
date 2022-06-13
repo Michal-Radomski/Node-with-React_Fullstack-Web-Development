@@ -25,7 +25,7 @@ class App extends React.Component<{fetchUser: Fetch}, {}> {
       <React.Fragment>
         <div className="container">
           <Router>
-            <div>
+            <div className="container">
               {/* Header always visible */}
               <Header auth={null} />
               <Switch>
