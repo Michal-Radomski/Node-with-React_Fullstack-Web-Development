@@ -19,6 +19,7 @@ class SurveyForm extends React.Component<
     handleSubmit: (
       arg0: (values: {title: string; subject: string; body: string; recipients: string}) => void
     ) => React.FormEventHandler<HTMLFormElement>;
+    validate(): void;
   },
   {}
 > {
@@ -59,6 +60,18 @@ class SurveyForm extends React.Component<
   }
 }
 
+function validate(values: Values) {
+  const errors = {title: ""};
+
+  if (!values.title) {
+    errors.title = "You must provide a title!";
+  }
+
+  console.log({errors});
+  return errors;
+}
+
 export default reduxForm<{}, State>({
+  validate: validate,
   form: "surveyForm",
 })(SurveyForm); //* Similar to connect form "react-redux"

@@ -11,3 +11,10 @@ interface Auth {
   googleID: string;
   name: string;
 }
+
+interface Values {
+  body: string;
+  emails: string;
+  subject: string;
+  title: string;
+}
