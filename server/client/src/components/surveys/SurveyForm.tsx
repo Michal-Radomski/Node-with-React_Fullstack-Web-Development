@@ -8,10 +8,10 @@ import {Link} from "react-router-dom";
 import SurveyField from "./SurveyField";
 
 const FIELDS = [
-  {label: "Survey Title", name: "title"},
-  {label: "Subject Line", name: "subject"},
-  {label: "Email Body", name: "body"},
-  {label: "Recipients List", name: "emails"},
+  {label: "Survey Title", name: "title", noValueError: "Provide a Survey Title"},
+  {label: "Subject Line", name: "subject", noValueError: "Provide a Survey Subject"},
+  {label: "Email Body", name: "body", noValueError: "Provide a Survey Body"},
+  {label: "Recipients List", name: "emails", noValueError: "Provide a Survey Emails"},
 ];
 
 class SurveyForm extends React.Component<
@@ -60,13 +60,41 @@ class SurveyForm extends React.Component<
   }
 }
 
-function validate(values: Values) {
-  const errors = {title: ""};
+//* First version
+// interface Values {
+//   body: string;
+//   emails: string;
+//   subject: string;
+//   title: string;
+// }
 
-  if (!values.title) {
-    errors.title = "You must provide a title!";
-  }
+// function validate(values: Values) {
+//   const errors = {title: "", subject: "", body: "", emails: ""};
+//   if (!values.title) {
+//     errors.title = "You must provide a title!";
+//   }
+//   if (!values.subject) {
+//     errors.subject = "You must provide a subject!";
+//   }
+//   if (!values.body) {
+//     errors.body = "You must provide a body!";
+//   }
+//   if (!values.emails) {
+//     errors.emails = "You must provide a emails!";
+//   }
 
+//   console.log({errors});
+//   return errors;
+// }
+
+//* Second version
+function validate(values: {[name: string]: string}) {
+  const errors: {[name: string]: string} = {};
+  _.each(FIELDS, ({name, noValueError}) => {
+    if (!values[name]) {
+      errors[name] = noValueError;
+    }
+  });
   console.log({errors});
   return errors;
 }
