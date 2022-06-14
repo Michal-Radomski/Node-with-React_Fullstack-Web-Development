@@ -2,13 +2,36 @@
 
 import React from "react";
 import {connect} from "react-redux";
-const SurveyFormReview = ({onCancel, formValues}: {onCancel: () => void; formValues: Values}): JSX.Element => {
-  console.log({formValues});
+import _ from "lodash";
+
+import FIELDS from "./formFields";
+
+const SurveyFormReview = ({
+  onCancel,
+  formValues,
+}: {
+  onCancel: () => void;
+  formValues: {[name: string]: string};
+}): JSX.Element => {
+  // console.log({formValues});
+  // {[name: string]: string}
+
+  // const reviewFields = _.map(FIELDS, (field: {label: string; name: string; noValueError: string}) => {
+  //* After Refactoring
+  const reviewFields = _.map(FIELDS, ({label, name}: {label: string; name: string}) => {
+    return (
+      <div key={name}>
+        <label>{label}</label>
+        <div>{formValues[name]}</div>
+      </div>
+    );
+  });
+
   return (
     <React.Fragment>
       <div>
         <h5>Please confirm your entries</h5>
-        <div>
+        {/* <div>
           <div>
             <label>Survey Title</label>
             <div>{formValues.title}</div>
@@ -25,7 +48,9 @@ const SurveyFormReview = ({onCancel, formValues}: {onCancel: () => void; formVal
             <label>Recipients List</label>
             <div>{formValues.emails}</div>
           </div>
-        </div>
+        </div> */}
+        {/* //* After Refactoring */}
+        {reviewFields}
         <br />
         <button className="yellow darken-3 btn-flat" onClick={onCancel}>
           Go Back <i className="material-icons">arrow_back</i>

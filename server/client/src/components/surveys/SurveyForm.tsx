@@ -7,15 +7,7 @@ import {Link} from "react-router-dom";
 
 import SurveyField from "./SurveyField";
 import validateEmails from "../../utils/validateEmails";
-
-const messageError: string = "Provide a Survey";
-
-const FIELDS = [
-  {label: "Survey Title", name: "title", noValueError: `${messageError} Title`},
-  {label: "Subject Line", name: "subject", noValueError: `${messageError} Subject`},
-  {label: "Email Body", name: "body", noValueError: `${messageError} Body`},
-  {label: "Recipients List", name: "emails", noValueError: `${messageError} Emails`},
-];
+import FIELDS from "./formFields";
 
 class SurveyForm extends React.Component<
   {
