@@ -6,6 +6,7 @@ import _ from "lodash";
 import {Link} from "react-router-dom";
 
 import SurveyField from "./SurveyField";
+import validateEmails from "../../utils/validateEmails";
 
 const FIELDS = [
   {label: "Survey Title", name: "title", noValueError: "Provide a Survey Title"},
@@ -89,12 +90,15 @@ class SurveyForm extends React.Component<
 
 //* Second version
 function validate(values: {[name: string]: string}) {
-  const errors: {[name: string]: string} = {};
+  const errors: {[name: string]: string | null} = {};
   _.each(FIELDS, ({name, noValueError}) => {
     if (!values[name]) {
       errors[name] = noValueError;
     }
   });
+
+  errors.email = validateEmails(values.email || "");
+
   console.log({errors});
   return errors;
 }
