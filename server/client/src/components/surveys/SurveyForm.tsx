@@ -17,10 +17,9 @@ const FIELDS = [
 
 class SurveyForm extends React.Component<
   {
-    handleSubmit: (
-      arg0: (values: {title: string; subject: string; body: string; recipients: string}) => void
-    ) => React.FormEventHandler<HTMLFormElement>;
+    handleSubmit: (arg0: (values: Values) => void) => React.FormEventHandler<HTMLFormElement>;
     validate(): void;
+    onSurveySubmit(): void;
   },
   {}
 > {
@@ -43,14 +42,16 @@ class SurveyForm extends React.Component<
     return (
       <div>
         <form
-          onSubmit={this.props.handleSubmit((values: {title: string; subject: string; body: string; recipients: string}) =>
-            console.log({values})
-          )}
+          // onSubmit={this.props.handleSubmit((values: Values) => {
+          //   console.log({values});
+          //   this.props.onSurveySubmit();
+          // })}
+          onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}
         >
           {/* <Field type="text" name="surveyTitle" component="input" /> */}
           {this.renderFields()}
           <Link to="/surveys" className="red btn-flat left white-text">
-            Cancel
+            Cancel <i className="material-icons right">cancel</i>
           </Link>
           <button type="submit" className="teal btn-flat right white-text">
             Next <i className="material-icons right">done</i>
@@ -99,7 +100,7 @@ function validate(values: {[name: string]: string}) {
 
   errors.email = validateEmails(values.email || "");
 
-  console.log({errors});
+  // console.log({errors});
   return errors;
 }
 
