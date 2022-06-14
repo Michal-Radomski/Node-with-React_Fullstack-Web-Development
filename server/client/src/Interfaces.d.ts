@@ -16,5 +16,5 @@ interface Values {
   title: string;
   subject: string;
   body: string;
-  recipients: string;
+  emails: string;
 }

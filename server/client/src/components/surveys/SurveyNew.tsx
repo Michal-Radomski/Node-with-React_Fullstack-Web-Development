@@ -18,7 +18,10 @@ class SurveyNew extends React.Component<{}, {}> {
     if (this.state.showFormReview === true) {
       //* ===  if (this.state.showFormReview)
       return <SurveyFormReview onCancel={() => this.setState({showFormReview: false})} />;
-    } else return <SurveyForm onSurveySubmit={() => this.setState({showFormReview: true})} />;
+    } else {
+      //* Can be without else
+      return <SurveyForm onSurveySubmit={() => this.setState({showFormReview: true})} />;
+    }
   }
 
   render() {

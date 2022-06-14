@@ -8,11 +8,13 @@ import {Link} from "react-router-dom";
 import SurveyField from "./SurveyField";
 import validateEmails from "../../utils/validateEmails";
 
+const messageError: string = "Provide a Survey";
+
 const FIELDS = [
-  {label: "Survey Title", name: "title", noValueError: "Provide a Survey Title"},
-  {label: "Subject Line", name: "subject", noValueError: "Provide a Survey Subject"},
-  {label: "Email Body", name: "body", noValueError: "Provide a Survey Body"},
-  {label: "Recipients List", name: "emails", noValueError: "Provide a Survey Emails"},
+  {label: "Survey Title", name: "title", noValueError: `${messageError} Title`},
+  {label: "Subject Line", name: "subject", noValueError: `${messageError} Subject`},
+  {label: "Email Body", name: "body", noValueError: `${messageError} Body`},
+  {label: "Recipients List", name: "emails", noValueError: `${messageError} Emails`},
 ];
 
 class SurveyForm extends React.Component<
@@ -107,4 +109,5 @@ function validate(values: {[name: string]: string}) {
 export default reduxForm<{}, State>({
   validate: validate,
   form: "surveyForm",
+  destroyOnUnmount: false,
 })(SurveyForm); //* Similar to connect form "react-redux"
