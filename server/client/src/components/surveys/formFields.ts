@@ -5,7 +5,7 @@ const FIELDS: {label: string; name: string; noValueError: string}[] = [
   {label: "Survey Title", name: "title", noValueError: `${messageError} Title`},
   {label: "Subject Line", name: "subject", noValueError: `${messageError} Subject`},
   {label: "Email Body", name: "body", noValueError: `${messageError} Body`},
-  {label: "Recipients List", name: "emails", noValueError: `${messageError} Emails`},
+  {label: "Recipients List", name: "recipients", noValueError: `${messageError} Emails`},
 ];
 
 export default FIELDS;

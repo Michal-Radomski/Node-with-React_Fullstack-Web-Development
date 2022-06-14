@@ -86,13 +86,19 @@ class SurveyForm extends React.Component<
 //* Second version
 function validate(values: {[name: string]: string}) {
   const errors: {[name: string]: string | null} = {};
-  _.each(FIELDS, ({name, noValueError}) => {
+  errors.recipients = validateEmails(values.recipients || "");
+
+  // _.each(FIELDS, ({name, noValueError}) => {
+  //   if (!values[name]) {
+  //     errors[name] = noValueError;
+  //   }
+  // });
+
+  FIELDS.forEach(({name, noValueError}) => {
     if (!values[name]) {
       errors[name] = noValueError;
     }
   });
-
-  errors.email = validateEmails(values.email || "");
 
   // console.log({errors});
   return errors;
