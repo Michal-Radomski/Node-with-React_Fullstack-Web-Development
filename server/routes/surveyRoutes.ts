@@ -1,6 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 
+const _ = require("lodash");
+const {Path} = require("path-parser");
+const {URL} = require("url");
+
 const requireLogin = require("../middleware/requireLogin");
 const requireCredits = require("../middleware/requireCredits");
 import {CustomRequest} from "../Interfaces";
@@ -21,9 +25,30 @@ module.exports = (app: {
   });
 
   app.post("/api/surveys/webhooks", (req: CustomRequest, res: express.Response) => {
-    console.log("req.body:", req.body);
-    console.log("req.ip:", req.ip);
     console.log("Current Time:", new Date().toLocaleString());
+    // const events = _.map(req.body, (event: {url: string; email: string}) => {
+    //   const pathname = new URL(event.url).pathname;
+    //   const parser = new Path("/api/surveys/:surveyId/:choice");
+    //   // console.log(parser.test(pathname));
+    //   const match = parser.test(pathname);
+    //   if (match) {
+    //     return {email: event.email, surveyID: match.surveyId, choice: match.choice};
+    //   }
+    // });
+    //* After Refactoring
+    const events = _.map(req.body, ({url, email}: {url: string; email: string}) => {
+      const pathname = new URL(url).pathname;
+      const parser = new Path("/api/surveys/:surveyId/:choice");
+      // console.log(parser.test(pathname));
+      const match = parser.test(pathname);
+      if (match) {
+        return {email, surveyID: match.surveyId, choice: match.choice};
+      }
+    });
+    // console.log({events});
+    const compactEvents = _.compact(events);
+    const uniqueEvents = _.uniqBy(compactEvents, "email", "surveyID");
+    console.log({uniqueEvents});
     res.send({});
   });
 
