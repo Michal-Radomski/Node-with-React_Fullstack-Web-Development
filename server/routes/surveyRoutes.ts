@@ -35,19 +35,35 @@ module.exports = (app: {
     //     return {email: event.email, surveyID: match.surveyId, choice: match.choice};
     //   }
     // });
+
     //* After Refactoring
-    const events = _.map(req.body, ({url, email}: {url: string; email: string}) => {
-      const pathname = new URL(url).pathname;
-      const parser = new Path("/api/surveys/:surveyId/:choice");
-      // console.log(parser.test(pathname));
-      const match = parser.test(pathname);
-      if (match) {
-        return {email, surveyID: match.surveyId, choice: match.choice};
-      }
-    });
-    // console.log({events});
-    const compactEvents = _.compact(events);
-    const uniqueEvents = _.uniqBy(compactEvents, "email", "surveyID");
+    // const events = _.map(req.body, ({url, email}: {url: string; email: string}) => {
+    //   const pathname = new URL(url).pathname;
+    //   const parser = new Path("/api/surveys/:surveyId/:choice");
+    //   // console.log(parser.test(pathname));
+    //   const match = parser.test(pathname);
+    //   if (match) {
+    //     return {email, surveyID: match.surveyId, choice: match.choice};
+    //   }
+    // });
+    // // console.log({events});
+    // const compactEvents = _.compact(events);
+    // const uniqueEvents = _.uniqBy(compactEvents, "email", "surveyID");
+    // console.log({uniqueEvents});
+    // res.send({});
+
+    //* After Refactoring_2
+    const parser = new Path("/api/surveys/:surveyId/:choice");
+    const uniqueEvents = _.chain(req.body)
+      .map(({url, email}: {url: string; email: string}) => {
+        const match = parser.test(new URL(url).pathname);
+        if (match) {
+          return {email, surveyID: match.surveyId, choice: match.choice};
+        }
+      })
+      .compact()
+      .uniqBy("email", "surveyID")
+      .value();
     console.log({uniqueEvents});
     res.send({});
   });
