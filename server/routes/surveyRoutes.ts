@@ -1,5 +1,4 @@
 import express from "express";
-
 import mongoose from "mongoose";
 
 const requireLogin = require("../middleware/requireLogin");
@@ -24,6 +23,7 @@ module.exports = (app: {
   app.post("/api/surveys/webhooks", (req: CustomRequest, res: express.Response) => {
     console.log("req.body:", req.body);
     console.log("req.ip:", req.ip);
+    console.log("Current Time:", new Date().toLocaleString());
     res.send({});
   });
 
