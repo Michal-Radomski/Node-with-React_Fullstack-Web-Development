@@ -1,6 +1,7 @@
 // Interfaces and Types
 
 export interface CustomRequest extends Request {
+  ip?: string;
   user: {
     id: string;
     credits: number;

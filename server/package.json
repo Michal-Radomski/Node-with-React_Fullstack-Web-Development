@@ -15,7 +15,7 @@
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --client && npm run build --prefix client",
-    "webhook": "lt --port 5000 --subdomain XIVK40vX40yMt0Rv"
+    "webhook": "lt --port 5000 --subdomain fanrrjewprg0pweu"
   },
   "author": "MichRad",
   "license": "MIT",

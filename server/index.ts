@@ -1,5 +1,6 @@
 const express = require("express");
 import {Request, Response} from "express";
+// import localtunnel from "localtunnel";
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
@@ -66,3 +67,21 @@ app.listen(PORT, () => {
 //* For testing only
 const now: Date = new Date();
 console.log("Current time:", now.toLocaleString());
+
+//* Function to run localtunnel with a custom subdomain:
+//* https://fanrrjewprg0pweu.loca.lt
+// (async () => {
+//   const tunnel = await localtunnel({port: 5000, subdomain: "fanrrjewprg0pweu"});
+
+//   console.log(tunnel.url);
+
+//   tunnel.on("close", () => {
+//     console.log("\nTunnel closed");
+//   });
+
+//   process.on("SIGINT", () => {
+//     console.log("test");
+//     tunnel.close();
+//     process.exit(0);
+//   });
+// })();
