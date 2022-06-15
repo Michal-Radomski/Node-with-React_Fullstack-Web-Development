@@ -1,6 +1,7 @@
 // SurveyNew shows SurveyFrom and SurveyFromReview
 
 import React from "react";
+import {reduxForm} from "redux-form";
 
 import SurveyForm from "./SurveyForm";
 import SurveyFormReview from "./SurveyFormReview";
@@ -34,4 +35,7 @@ class SurveyNew extends React.Component<{}, {}> {
   }
 }
 
-export default SurveyNew;
+export default reduxForm<{}, State>({
+  form: "surveyForm",
+  destroyOnUnmount: true, //* Default behavior
+})(SurveyNew);

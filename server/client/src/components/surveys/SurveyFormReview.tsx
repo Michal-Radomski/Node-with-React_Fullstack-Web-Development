@@ -3,6 +3,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import _ from "lodash";
+import {withRouter, RouteComponentProps} from "react-router-dom";
 
 import FIELDS from "./formFields";
 import * as actions from "../../redux/actions/index";
@@ -11,11 +12,14 @@ const SurveyFormReview = ({
   onCancel,
   formValues,
   submitSurvey,
+  history,
 }: {
   onCancel: () => void;
   formValues: {[name: string]: string};
-  submitSurvey(formValues: Object): void;
-}): JSX.Element => {
+  submitSurvey(formValues: Object, history: string[]): void;
+  history: string[];
+} & RouteComponentProps): JSX.Element => {
+  console.log();
   // console.log({formValues});
   // {[name: string]: string}
 
@@ -59,7 +63,7 @@ const SurveyFormReview = ({
         <button className="yellow darken-3 white-text btn-flat" onClick={onCancel}>
           Go Back <i className="material-icons right">arrow_back</i>
         </button>
-        <button className="green btn-flat right white-text" onClick={() => submitSurvey(formValues)}>
+        <button className="green btn-flat right white-text" onClick={() => submitSurvey(formValues, history)}>
           Send Survey <i className="material-icons right">email</i>
         </button>
       </div>
@@ -72,4 +76,4 @@ const mapStateToProps = (state: State) => {
   return {formValues: state.form.surveyForm.values};
 };
 
-export default connect(mapStateToProps, actions)(SurveyFormReview);
+export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));
