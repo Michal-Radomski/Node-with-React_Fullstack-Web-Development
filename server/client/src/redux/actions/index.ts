@@ -1,7 +1,7 @@
 import axios from "axios";
 import {Token} from "react-stripe-checkout";
 
-import {FETCH_USER} from "./types";
+import {FETCH_USER, FETCH_SURVEYS} from "./types";
 
 // export const fetchUser = () => {
 //   return function (dispatch: Dispatch) {
@@ -29,4 +29,9 @@ export const submitSurvey = (values: Values, history: string[]) => async (dispat
   const response = await axios.post("/api/surveys", values);
   history.push("/surveys");
   dispatch({type: FETCH_USER, payload: response?.data});
+};
+
+export const fetchSurveys = () => async (dispatch: Dispatch) => {
+  const response = await axios.get("/api/surveys");
+  dispatch({type: FETCH_SURVEYS, payload: response?.data});
 };
