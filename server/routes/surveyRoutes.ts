@@ -54,7 +54,7 @@ module.exports = (app: {
 
     //* After Refactoring_2
     const parser = new Path("/api/surveys/:surveyId/:choice");
-    const uniqueEvents = _.chain(req.body)
+    _.chain(req.body)
       .map(({url, email}: {url: string; email: string}) => {
         const match = parser.test(new URL(url).pathname);
         if (match) {
@@ -80,7 +80,7 @@ module.exports = (app: {
         ).exec();
       })
       .value();
-    console.log({uniqueEvents});
+    // console.log({uniqueEvents});
     res.send({});
   });
 

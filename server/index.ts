@@ -18,6 +18,7 @@ require("./services/passport"); //* Calling the function immediately instead of 
 // const authRoutes = require("./routes/authRoutes");
 
 // Connect to MongoDB
+mongoose.Promise = global.Promise;
 mongoose
   .connect(mongoDB_key, {
     useNewUrlParser: true,
