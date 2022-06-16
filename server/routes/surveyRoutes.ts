@@ -32,7 +32,7 @@ module.exports = (app: {
     //   // console.log(parser.test(pathname));
     //   const match = parser.test(pathname);
     //   if (match) {
-    //     return {email: event.email, surveyID: match.surveyId, choice: match.choice};
+    //     return {email: event.email, surveyId: match.surveyId, choice: match.choice};
     //   }
     // });
 
@@ -43,28 +43,31 @@ module.exports = (app: {
     //   // console.log(parser.test(pathname));
     //   const match = parser.test(pathname);
     //   if (match) {
-    //     return {email, surveyID: match.surveyId, choice: match.choice};
+    //     return {email, surveyId: match.surveyId, choice: match.choice};
     //   }
     // });
     // // console.log({events});
     // const compactEvents = _.compact(events);
-    // const uniqueEvents = _.uniqBy(compactEvents, "email", "surveyID");
+    // const uniqueEvents = _.uniqBy(compactEvents, "email", "surveyId");
     // console.log({uniqueEvents});
     // res.send({});
 
     //* After Refactoring_2
     const parser = new Path("/api/surveys/:surveyId/:choice");
+    // console.log({parser});
     _.chain(req.body)
       .map(({url, email}: {url: string; email: string}) => {
         const match = parser.test(new URL(url).pathname);
+        // console.log({match});
         if (match) {
-          return {email, surveyID: match.surveyId, choice: match.choice};
+          // console.log({email: email, surveyId: match.surveyId, choice: match.choice});
+          return {email: email, surveyId: match.surveyId, choice: match.choice};
         }
       })
       .compact()
-      .uniqBy("email", "surveyID")
+      .uniqBy("email", "surveyId")
       .each(({surveyId, email, choice}: {surveyId: string; email: string; choice: string}) => {
-        // console.log({choice});
+        console.log({surveyId, email, choice});
         Survey.updateOne(
           {
             _id: surveyId, //* _id in MongoDB
