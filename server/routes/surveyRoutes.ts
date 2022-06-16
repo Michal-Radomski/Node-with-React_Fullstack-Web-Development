@@ -19,7 +19,7 @@ module.exports = (app: {
   post: (arg0: string, arg1: Post, arg2?: void, arg3?: (req: CustomRequest, res: express.Response) => void) => void;
   get: (arg0: string, arg1: (req: express.Request, res: express.Response) => void) => void;
 }) => {
-  app.get("/api/surveys/thanks", (req: express.Request, res: express.Response) => {
+  app.get("/api/surveys/:surveyId/:choice", (req: express.Request, res: express.Response) => {
     console.log("req.ip:", req.ip);
     res.send("Thanks for Voting!");
   });
@@ -63,6 +63,22 @@ module.exports = (app: {
       })
       .compact()
       .uniqBy("email", "surveyID")
+      .each(({surveyId, email, choice}: {surveyId: string; email: string; choice: string}) => {
+        // console.log({choice});
+        Survey.updateOne(
+          {
+            _id: surveyId, //* _id in MongoDB
+            recipients: {
+              $elemMatch: {email: email, responded: false},
+            },
+          },
+          {
+            $inc: {[choice]: 1},
+            $set: {"recipients.$.responded": true},
+            lastResponded: new Date(),
+          }
+        ).exec();
+      })
       .value();
     console.log({uniqueEvents});
     res.send({});

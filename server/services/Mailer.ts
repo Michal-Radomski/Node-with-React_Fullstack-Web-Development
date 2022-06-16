@@ -2,15 +2,16 @@
 
 const sendgrid = require("sendgrid");
 const helper = sendgrid.mail; //* The same as: const {mail}=sendgrid but we want to change the name to helper
+
 //* Other way for helper
 // const helper = require('sendgrid').mail;
 
-// const testMail = sendgrid.mail.Mail;
-// console.log({testMail});
+const SendgridMail = sendgrid.mail.Mail;
+// console.log({sendgridMail});
 
 const keys = require("../config/keys");
 
-class Mailer extends helper.Mail {
+class Mailer extends SendgridMail {
   constructor({subject, recipients}: {subject: string; recipients: {email: string}[]}, content: string) {
     super();
 
