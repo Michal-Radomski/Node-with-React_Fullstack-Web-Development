@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 
@@ -13,7 +13,6 @@ declare global {
   }
 }
 window.axios = axios;
-//* Temp-email: https://temp-mail.org/pl
 // let survey = {
 //   title: "Title of the Message",
 //   subject: "Subject: Survey",
