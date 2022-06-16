@@ -13,13 +13,20 @@ const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 
 const Survey = mongoose.model("surveys");
 
+//* Custom Types
 type Post = void | ((req: CustomRequest, res: express.Response) => void); //* It is correct?
+type Get = ((req: CustomRequest, res: express.Response) => void) | void; //* It is correct?
 
 module.exports = (app: {
   post: (arg0: string, arg1: Post, arg2?: void, arg3?: (req: CustomRequest, res: express.Response) => void) => void;
-  get: (arg0: string, arg1: (req: express.Request, res: express.Response) => void) => void;
+  get: (arg0: string, arg1: Get, arg2?: (req: CustomRequest, res: express.Response) => void) => void;
 }) => {
-  app.get("/api/surveys/:surveyId/:choice", (req: express.Request, res: express.Response) => {
+  app.get("/api/surveys", requireLogin, async (req: CustomRequest, res: express.Response) => {
+    const surveys = await Survey.find({_user: req.user.id}).select({recipients: false});
+    res.send(surveys);
+  });
+
+  app.get("/api/surveys/:surveyId/:choice", (req: CustomRequest, res: express.Response) => {
     console.log("req.ip:", req.ip);
     res.send("Thanks for Voting!");
   });
